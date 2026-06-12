@@ -4,24 +4,27 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.*;
-
 public class FreeHand extends Figure{
 
-    private List<Point2D> freeHandLine = new ArrayList<>();
+    private DoublyLinkedList<Point2D> freeHandLine = new DoublyLinkedList<>("");
 
     public FreeHand(Point2D start, Color color){
         super(color, start);
     }
 
-    public void addPoint(Point2D point){ freeHandLine.add(point); }
+    public void addPoint(Point2D point){ freeHandLine.addEnd(point); }
 
     @Override
     public boolean contains(Point2D clickPoint){
-
         double range = 8.0;
 
-        for (Point2D p : freeHandLine){ if(p.distance(clickPoint) <= range) return true; }
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+
+        while (aux != null){
+            if (aux.valor.distance(clickPoint) <= range)
+                return true;
+            aux = aux.nextNode;
+        }
 
         return false;
     }
@@ -29,10 +32,14 @@ public class FreeHand extends Figure{
     @Override
     public double getX1(){
         if (freeHandLine.isEmpty()) return start.getX();
-        double xMin = freeHandLine.get(0).getX();
 
-        for (Point2D p : freeHandLine){
-            if (p.getX() < xMin) xMin = p.getX();
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+        double xMin = aux.valor.getX();
+
+        while (aux != null){
+            if (aux.valor.getX() < xMin)
+                xMin = aux.valor.getX();
+            aux = aux.nextNode;
         }
 
         return xMin;
@@ -40,11 +47,16 @@ public class FreeHand extends Figure{
 
     @Override
     public double getY1() {
-        if (freeHandLine.isEmpty()) return start.getY();
-        double yMin = freeHandLine.get(0).getY();
 
-        for (Point2D p : freeHandLine){
-            if (p.getY() < yMin) yMin = p.getY();
+        if (freeHandLine.isEmpty()) return start.getY();
+
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+        double yMin = aux.valor.getY();
+
+        while (aux != null) {
+            if (aux.valor.getY() < yMin)
+                yMin = aux.valor.getY();
+            aux = aux.nextNode;
         }
 
         return yMin;
@@ -53,10 +65,14 @@ public class FreeHand extends Figure{
     @Override
     public double getX2(){
         if (freeHandLine.isEmpty()) return start.getX();
-        double xMax = freeHandLine.get(0).getX();
 
-        for (Point2D p : freeHandLine){
-            if (p.getX() > xMax) xMax = p.getX();
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+        double xMax = aux.valor.getX();
+
+        while (aux != null) {
+            if (aux.valor.getX() > xMax)
+                xMax = aux.valor.getX();
+            aux = aux.nextNode;
         }
 
         return xMax;
@@ -65,10 +81,14 @@ public class FreeHand extends Figure{
     @Override
     public double getY2() {
         if (freeHandLine.isEmpty()) return start.getY();
-        double yMax = freeHandLine.get(0).getY();
 
-        for (Point2D p : freeHandLine){
-            if (p.getY() > yMax) yMax = p.getY();
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+        double yMax = aux.valor.getY();
+
+        while (aux != null){
+            if (aux.valor.getY() > yMax)
+                yMax = aux.valor.getY();
+            aux = aux.nextNode;
         }
 
         return yMax;
@@ -77,11 +97,13 @@ public class FreeHand extends Figure{
     @Override
     public void move(double movX, double movY){
         start = new Point2D(start.getX() + movX, start.getY() + movY);
-        int size = freeHandLine.size();
 
-        for (int i = 0; i < size; i++){
-            Point2D p = freeHandLine.get(i);
-            freeHandLine.set(i, new Point2D(p.getX() + movX, p.getY() + movY));
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+
+        while (aux != null){
+            aux.valor = new Point2D(aux.valor.getX()+movX,
+                                    aux.valor.getY()+movY);
+            aux = aux.nextNode;
         }
     }
 
@@ -93,11 +115,12 @@ public class FreeHand extends Figure{
         gc.setStroke(color);
         gc.beginPath();
 
-        Point2D pStart = freeHandLine.get(0);
-        gc.moveTo(pStart.getX(), pStart.getY());
+        Node<Point2D> aux = freeHandLine.getFirstNode();
+        gc.moveTo(aux.valor.getX(), aux.valor.getY());
 
-        for (Point2D p : freeHandLine){
-            gc.lineTo(p.getX(), p.getY());
+        while (aux != null){
+            gc.lineTo(aux.valor.getX(), aux.valor.getY());
+            aux = aux.nextNode;
         }
 
         gc.stroke();

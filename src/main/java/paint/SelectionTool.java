@@ -21,22 +21,22 @@ public class SelectionTool extends Tool{
         lastY = e.getY();
         selectedFigure = null;
 
-        for (Figure f : model.getFigures()){
-            f.setSelected(false);
+        Node<Figure> aux = model.getFirstNode();
+
+        while (aux != null){
+            aux.valor.setSelected(false);
+            aux = aux.nextNode;
         }
 
-        List<Figure> Figures = model.getFigures();
-        int size = Figures.size();
+        aux = model.getLastNode();
 
-        for (int i = size - 1; i >= 0; i--){
-            Figure f = Figures.get(i);
-
-            if (f.contains(click)){
-
-                f.setSelected(true);
-                selectedFigure = f;
-                break;
-            }
+        while (aux != null){
+           if (aux.valor.contains(click)){
+               aux.valor.setSelected(true);
+               selectedFigure = aux.valor;
+               break;
+           }
+           aux = aux.previousNode;
         }
 
         paintController.redraw();

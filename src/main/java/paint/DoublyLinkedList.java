@@ -6,96 +6,91 @@ public class DoublyLinkedList<T> {
     protected Node<T> lastNode;
     protected String nome;
     
-    public boolean isEmpty(){return firstNode == null;}
+    public boolean isEmpty(){ return firstNode == null; }
 
-    public Node<T> getFirstNode(){return firstNode;}
-    public Node<T> getLastNode(){return lastNode;}
+    public Node<T> getFirstNode(){ return firstNode; }
+    public Node<T> getLastNode(){ return lastNode; }
 
     public DoublyLinkedList (String nome){
         this.firstNode = this.lastNode = null;
         this.nome = nome;
     }
+
+    // adicionar no começo da lista
     public void addBegin(T valor){
         Node<T> novoNo = new Node<>(valor);
-        if(isEmpty()){
+        // lista vazia
+        if(isEmpty())
             firstNode = lastNode = novoNo;
-        }else{
+        // lista não vazia
+        else {
             firstNode.previousNode = novoNo;
             novoNo.nextNode = firstNode;
             firstNode = novoNo;
         }
-
     }
+
+    // adicionar no fim
     public void addEnd(T valor){
         Node<T> novoNo = new Node<>(valor);
-        if(isEmpty()){
+        if(isEmpty())
             firstNode = lastNode = novoNo;
-        }else{
+        else{
             lastNode.nextNode = novoNo;
             novoNo.previousNode = lastNode;
             lastNode = novoNo;
         }
-
     }
 
+    // remove do começo
     public void removeBegin(){
-        if(isEmpty()){
+        if(isEmpty())
             System.out.println("Lista vazia");
-        }else if(firstNode == lastNode){
+
+        else if(firstNode == lastNode)
             firstNode = lastNode = null;
-        }else{
-            
+
+        else{
             firstNode = firstNode.nextNode;
             firstNode.previousNode = null;
         }
     }
 
+    // remove do fim
     public void removeEnd(){
          if(isEmpty()){
             System.out.println("Lista vazia");
         }else if(firstNode == lastNode){
             firstNode = lastNode = null;
-    }else{
+        }else{
         lastNode = lastNode.previousNode;
         lastNode.nextNode = null;
-    }
-    
-}
-
-public boolean remove(T valor) {
-    if (isEmpty()) {
-        System.out.println("Lista vazia");
-        return false;
-    }
-
-    Node<T> atual = firstNode;
-    while (atual != null) {
-        if (atual.valor.equals(valor)) {
-            break; 
         }
-        atual = atual.nextNode;
     }
 
-    
-    if (atual == null) {
-        System.out.println("Valor não encontrado na lista.");
-        return false;
-    }
+    // remoção por valor
+    public boolean remove(T valor) {
 
-   
-    
-    if (atual == firstNode) {
-       
-        removeBegin();
-    } else if (atual == lastNode) {
-       
-        removeEnd();
-    } else {
-       
-        atual.previousNode.nextNode = atual.nextNode;
-        atual.nextNode.previousNode = atual.previousNode;
-    }
+        if (isEmpty()) return false;
 
-    return true; 
-}
+        Node<T> atual = firstNode;
+        while (atual != null) {
+            if (atual.valor.equals(valor))
+                break;
+            atual = atual.nextNode;
+        }
+
+        if (atual == null) return false;
+
+        if (atual == firstNode) removeBegin();
+
+        else if (atual == lastNode) removeEnd();
+
+        else {
+            atual.previousNode.nextNode = atual.nextNode;
+            atual.nextNode.previousNode = atual.previousNode;
+        }
+
+        return true;
+    }
 }

@@ -1,24 +1,27 @@
 package paint;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PaintModel {
 
-    private List<Figure> figures = new ArrayList<>(); 
+    private DoublyLinkedList<Figure> figures = new DoublyLinkedList<>("");
 
-    public void addFigure(Figure f) {
-        figures.add(f);
+    public void addFigure(Figure f) { figures.addEnd(f);}
+
+    public Node<Figure> getFirstNode(){
+        return figures.getFirstNode();
     }
 
-    public List<Figure> getFigures() {
-        return figures;
+    public Node<Figure> getLastNode(){
+        return figures.getLastNode();
     }
 
     public Figure getSelectedFigure() {
-        for (Figure f : figures){
-            if (f.isSelected()) return f;
+        Node<Figure> aux = figures.getFirstNode();
+
+        while (aux != null){
+            if (aux.valor.isSelected()) return aux.valor;
+            aux = aux.nextNode;
         }
+
         return null;
     }
 
@@ -28,13 +31,13 @@ public class PaintModel {
 
     public void toBack(Figure selectedFigure){
         if (figures.remove(selectedFigure)){
-            figures.add(0, selectedFigure);
+            figures.addBegin(selectedFigure);
         }
     }
 
     public void toForth(Figure selectedFigure){
         if (figures.remove(selectedFigure)){
-            figures.add(selectedFigure);
+            figures.addEnd(selectedFigure);
         }
     }
 }

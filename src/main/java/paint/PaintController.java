@@ -91,12 +91,12 @@ public class PaintController implements Initializable {
     }
 
     public void drawFigures() {
-        for (Figure f : model.getFigures()) {
-            f.draw(gc);
-
-            if (f.isSelected()){
-                f.drawSelection(gc);
-            }
+        Node<Figure> aux = model.getFirstNode();
+        while (aux != null){
+            aux.valor.draw(gc);
+            if (aux.valor.isSelected())
+                aux.valor.drawSelection(gc);
+            aux = aux.nextNode;
         }
     }
 
