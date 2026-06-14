@@ -4,7 +4,34 @@ public class PaintModel {
 
     private DoublyLinkedList<Figure> figures = new DoublyLinkedList<>("");
 
-    public void addFigure(Figure f) { figures.addEnd(f);}
+    // pilhas para gerenciar o fluxo de undo e redo
+    private DoublyLinkedStack<Figure> undoStack = new DoublyLinkedStack<>("Desfazer");
+    private DoublyLinkedStack<Figure> redoStack = new DoublyLinkedStack<>("Refazer");
+
+    public void addFigure(Figure f) {
+        figures.addEnd(f);
+        // empilha a figura sempre que uma nova for adicionada
+        undoStack.push(f);
+        // Sempre que o usuário desenha algo novo, a história do "Refazer" é limpa
+        redoStack = new DoublyLinkedStack<>("Refazer");
+    }
+
+    // desfazer a última ação
+    public void undo() {
+        if (!undoStack.isEmpty()) {
+            Figure lastFigure = undoStack.pop(); // Remove da pilha de desfazer
+            figures.remove(lastFigure);         // Remove da tela
+            redoStack.push(lastFigure);         // Guarda na pilha de refazer
+        }
+    }
+
+    public void redo() {
+        if (!redoStack.isEmpty()) {
+            Figure figureToRestore = redoStack.pop(); // Remove da pilha de refazer
+            figures.addEnd(figureToRestore);         // Devolve para a tela
+            undoStack.push(figureToRestore);         // Devolve para a pilha de desfazer
+        }
+    }
 
     public Node<Figure> getFirstNode(){
         return figures.getFirstNode();

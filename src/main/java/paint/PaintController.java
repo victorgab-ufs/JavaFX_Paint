@@ -19,7 +19,7 @@ public class PaintController implements Initializable {
 
     @FXML
     private Canvas canvas;
-    
+
     @FXML
     private ColorPicker colorPicker;
 
@@ -28,13 +28,13 @@ public class PaintController implements Initializable {
 
     private Tool[] tools;
     private int currentToolIndex = 0;
-    
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         gc = canvas.getGraphicsContext2D();
         tools = new Tool[] {new LineTool(model, this), new RectangleTool(model, this),
-                            new CircleTool(model, this), new FreeHandTool(model, this),
-                            new SelectionTool(model, this)};
+                new CircleTool(model, this), new FreeHandTool(model, this),
+                new SelectionTool(model, this)};
         colorPicker.setValue(javafx.scene.paint.Color.BLACK);
         modeChoice.setValue("Linha");
 
@@ -49,6 +49,20 @@ public class PaintController implements Initializable {
         canvas.setFocusTraversable(true);
 
         canvas.setOnKeyPressed(e -> {
+
+            // Verifica se a tecla Control (ou Command no Mac) está pressionada
+            if (e.isControlDown() || e.isShortcutDown()) {
+                if (e.getCode() == javafx.scene.input.KeyCode.Z) { // CTRL Z DESFAZER
+                    handleUndo();
+                    e.consume();
+                    return;
+                }
+                if (e.getCode() == javafx.scene.input.KeyCode.Y) { // CTRL Y REFAZER
+                    handleRedo();
+                    e.consume();
+                    return;
+                }
+            }
 
             Figure selected = model.getSelectedFigure();
             if (selected != null) {
@@ -105,7 +119,19 @@ public class PaintController implements Initializable {
         drawFigures();
     }
 
+    @FXML
+    public void handleUndo() {
+        model.undo();
+        redraw();
+    }
+
+    @FXML
+    public void handleRedo() {
+        model.redo();
+        redraw();
+    }
+
     public Color selectedColor() { return colorPicker.getValue(); }
-    
+
     public GraphicsContext getGraphicsContext() { return gc; }
 }
