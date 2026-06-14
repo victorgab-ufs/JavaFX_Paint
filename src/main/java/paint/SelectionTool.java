@@ -5,9 +5,12 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.List;
 
+// classe para a ferramenta de seleção (note que estende Tool)
 public class SelectionTool extends Tool{
 
+    // atributos que guardam últimos valores de x e y
     public double lastX, lastY;
+    // atributo que guarda a figura selecionada no momento (inicia em null)
     private Figure selectedFigure = null;
 
     public SelectionTool(PaintModel model, PaintController paintController){ super(model, paintController); }
