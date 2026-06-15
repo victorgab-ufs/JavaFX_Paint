@@ -1,6 +1,6 @@
 # 🎨 JavaFX Paint (LinkedPaint) 
 
-Um editor gráfico vetorial desenvolvido em **Java** utilizando a biblioteca **JavaFX** e gerenciamento de dependências pelo **Maven**. Este projeto aplica conceitos sólidos de Programação Orientada a Objetos (POO) e Padrões de Projeto para criar uma aplicação robusta e extensível.
+Um editor gráfico vetorial desenvolvido em **Java** utilizando a biblioteca **JavaFX** e gerenciamento de dependências pelo **Maven**. Este projeto aplica conceitos sólidos de Programação Orientada a Objetos (POO) e Padrões de Projeto para criar uma aplicação robusta e extensível. Além disso, as funcionalidades foram implementadas fazendo uso de Lista Duplamente Encadeada e Pilha, colocando em prática os conhecimentos adquiridos em Estrutura de Dados.
 
 ## ✨ Funcionalidades
 
@@ -12,8 +12,8 @@ Um editor gráfico vetorial desenvolvido em **Java** utilizando a biblioteca **J
     - `<SETA PARA CIMA>`: Traz a figura selecionada para a frente.
     - `<SETA PARA BAIXO>`: Envia a figura selecionada para trás.
 - **Remoção:** Pressione `<DEL>` ou `<BACKSPACE>` para apagar a figura selecionada.
-- **Desfazer (undo):** Pressione o botão "desfazer" ou Ctrl+Z para desfazer a última ação.
-- **Refazer (redo):** Pressione o botão "refazer" ou Ctrl+Y para refazer ações desfeitas.
+- **Desfazer (undo):** Pressione o botão "desfazer" ou `<Ctrl+Z>` para desfazer a última ação.
+- **Refazer (redo):** Pressione o botão "refazer" ou `<Ctrl+Y>` para refazer ações desfeitas.
 
 ## 🛠️ Arquitetura e Padrões de Projeto
 
@@ -29,27 +29,37 @@ O projeto foi construído focando em boas práticas de engenharia de software:
 - [Java JDK 11+](https://adoptium.net/)
 - [Apache Maven](https://maven.apache.org/)
 
-### Passos
+### Opção 1: Pelo terminal (Requer Maven instalado)
 1. Clone este repositório:
-   ```bash
-   git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
-
+```bash   
+git clone https://github.com/victorgab-ufs/JavaFX_Paint.git
+```   
 2. Acesse a pasta do projeto:
-
-Bash
-cd NOME_DA_PASTA_DO_PROJETO
-
+```bash
+cd JavaFX_Paint
+```
 3. Compile e execute a aplicação usando o plugin do JavaFX no Maven:
-
-Bash
+```bash
 mvn clean javafx:run
+```
+### Opção 2: Pela IDE
+
+1. Baixe o arquivo `.zip` do projeto direto pelo botão **Code** no GitHub e extraia-o.
+
+2. Abra a pasta extraída em uma IDE de sua preferência (**IntelliJ IDEA, VS Code** ou **Eclipse**).
+
+3. Aguarde a IDE carregar o projeto e baixar as dependências do JavaFX automaticamente usando o `pom.xml`.
+
+4. Navegue na estrutura de arquivos até a classe principal: `src/main/java/.../App.java`.
+
+5. Clique com o botão direito no arquivo e selecione **Run / Executar**.
 
 💻 Tecnologias Utilizadas
 
-Java 11
+- Java 21
 
-JavaFX 21 (Controls e FXML)
+- JavaFX 21 (Controls e FXML)
 
-Maven (Build e Dependências)
+- Maven (Build e Dependências)
 
-Scene Builder (Design da Interface FXML)
+- Scene Builder (Design da Interface FXML)
