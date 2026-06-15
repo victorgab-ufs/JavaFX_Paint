@@ -12,6 +12,8 @@ Um editor gráfico vetorial desenvolvido em **Java** utilizando a biblioteca **J
     - `<SETA PARA CIMA>`: Traz a figura selecionada para a frente.
     - `<SETA PARA BAIXO>`: Envia a figura selecionada para trás.
 - **Remoção:** Pressione `<DEL>` ou `<BACKSPACE>` para apagar a figura selecionada.
+- **Desfazer (undo):** Pressione o botão "desfazer" ou Ctrl+Z para desfazer a última ação.
+- **Refazer (redo):** Pressione o botão "refazer" ou Ctrl+Y para refazer ações desfeitas.
 
 ## 🛠️ Arquitetura e Padrões de Projeto
 
@@ -51,7 +53,3 @@ JavaFX 21 (Controls e FXML)
 Maven (Build e Dependências)
 
 Scene Builder (Design da Interface FXML)
-
-### Projeto desenvolvido como atividade final na disciplina de Programação Orientada a Objetos, ministrada pelo Professor Dr. Giovanny Lucero 
-
-
