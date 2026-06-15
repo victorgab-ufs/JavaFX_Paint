@@ -1,4 +1,4 @@
-# 🎨 JavaFX Paint 
+# 🎨 JavaFX Paint (LinkedPaint) 
 
 Um editor gráfico vetorial desenvolvido em **Java** utilizando a biblioteca **JavaFX** e gerenciamento de dependências pelo **Maven**. Este projeto aplica conceitos sólidos de Programação Orientada a Objetos (POO) e Padrões de Projeto para criar uma aplicação robusta e extensível.
 
