@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 
 public abstract class Figure {
 
+    // atributo que mostra caso a figura esteja selecionada
     private boolean selected = false;
     protected Color color;
     protected Point2D start;

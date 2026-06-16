@@ -121,6 +121,7 @@ public class PaintController implements Initializable {
 
     @FXML
     public void handleUndo() {
+        // chamamos
         model.undo();
         redraw();
     }

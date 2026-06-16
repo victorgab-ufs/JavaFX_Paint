@@ -1,5 +1,6 @@
 package paint;
 
+// n
 public class Node<T> {
     Node<T> nextNode;
     Node<T> previousNode;

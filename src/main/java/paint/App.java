@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 
 import java.io.IOException;
 
+// classe principal, que deve ser executada para o programa rodar (o conteúdo dela vem, em sua maioria, do javafx)
 public class App extends Application {
 
     private static Scene scene;
