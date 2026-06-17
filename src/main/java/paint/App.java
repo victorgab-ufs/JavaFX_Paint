@@ -9,7 +9,15 @@ import javafx.scene.image.Image;
 
 import java.io.IOException;
 
-// classe principal, que deve ser executada para o programa rodar (o conteúdo dela vem, em sua maioria, do javafx)
+/*
+Fazem parte do grupo responsável por esse projeto:
+Ábian Machado
+João Guilherme Lima Ramos
+Renato Vasconcelos Campos Filho
+Victor Gabriel Santos Alves
+*/
+
+// classe principal, que deve ser executada (o main) para o programa rodar (o conteúdo dela vem, em sua maioria, do javafx)
 public class App extends Application {
 
     private static Scene scene;
